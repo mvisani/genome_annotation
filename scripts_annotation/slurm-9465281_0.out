@@ -1,0 +1,110 @@
+2022-11-02 10:50:36,929 -WARNING- Grid computing is not available because DRMAA not configured properly: Could not find drmaa library.  Please specify its full path using the environment variable DRMAA_LIBRARY_PATH
+2022-11-02 10:50:36,947 -INFO- VARS: {'sequence': '/data/users/mvisani/annotation_genome/transpos_element_annotation/auto//canu/parsed.fa', 'hmm_database': 'rexdb-plant', 'seq_type': 'nucl', 'prefix': 'parsed.fa.rexdb-plant', 'force_write_hmmscan': False, 'processors': 24, 'tmp_dir': './tmp', 'min_coverage': 20, 'max_evalue': 0.001, 'disable_pass2': False, 'pass2_rule': '80-80-80', 'no_library': False, 'no_reverse': False, 'no_cleanup': False, 'p2_identity': 80.0, 'p2_coverage': 80.0, 'p2_length': 80.0}
+2022-11-02 10:50:36,947 -INFO- checking dependencies:
+2022-11-02 10:50:36,988 -INFO- hmmer	3.3.1	OK
+2022-11-02 10:50:37,443 -INFO- blastn	2.10.1+	OK
+2022-11-02 10:50:37,450 -INFO- check database rexdb-plant
+2022-11-02 10:50:37,450 -INFO- db path: /usr/local/lib/python3.9/site-packages/TEsorter/database
+2022-11-02 10:50:37,450 -INFO- db file: REXdb_protein_database_viridiplantae_v3.0.hmm
+2022-11-02 10:50:37,451 -INFO- REXdb_protein_database_viridiplantae_v3.0.hmm	OK
+2022-11-02 10:50:37,452 -INFO- Start classifying pipeline
+2022-11-02 10:50:37,591 -INFO- total 17917 sequences
+2022-11-02 10:50:37,591 -INFO- translating `/data/users/mvisani/annotation_genome/transpos_element_annotation/auto//canu/parsed.fa` in six frames
+/usr/local/lib/python3.9/site-packages/Bio/Seq.py:2334: BiopythonWarning: Partial codon, len(sequence) not a multiple of three. Explicitly trim the sequence or add trailing N before translation. This may become an error in future.
+  warnings.warn(
+2022-11-02 10:50:49,120 -INFO- HMM scanning against `/usr/local/lib/python3.9/site-packages/TEsorter/database/REXdb_protein_database_viridiplantae_v3.0.hmm`
+2022-11-02 10:50:50,469 -INFO- Creating server instance (pp-1.6.4.4)
+2022-11-02 10:50:50,469 -INFO- Running on Python 3.9.0 linux
+2022-11-02 10:50:54,330 -INFO- pp local server started with 24 workers
+2022-11-02 10:50:54,343 -INFO- Task 0 started
+2022-11-02 10:50:54,344 -INFO- Task 1 started
+2022-11-02 10:50:54,344 -INFO- Task 2 started
+2022-11-02 10:50:54,345 -INFO- Task 3 started
+2022-11-02 10:50:54,345 -INFO- Task 4 started
+2022-11-02 10:50:54,346 -INFO- Task 5 started
+2022-11-02 10:50:54,346 -INFO- Task 6 started
+2022-11-02 10:50:54,347 -INFO- Task 7 started
+2022-11-02 10:50:54,347 -INFO- Task 8 started
+2022-11-02 10:50:54,348 -INFO- Task 9 started
+2022-11-02 10:50:54,349 -INFO- Task 10 started
+2022-11-02 10:50:54,350 -INFO- Task 11 started
+2022-11-02 10:50:54,351 -INFO- Task 12 started
+2022-11-02 10:50:54,370 -INFO- Task 13 started
+2022-11-02 10:50:54,370 -INFO- Task 14 started
+2022-11-02 10:50:54,378 -INFO- Task 15 started
+2022-11-02 10:50:54,378 -INFO- Task 16 started
+2022-11-02 10:50:54,379 -INFO- Task 17 started
+2022-11-02 10:50:54,380 -INFO- Task 18 started
+2022-11-02 10:50:54,381 -INFO- Task 19 started
+2022-11-02 10:50:54,382 -INFO- Task 20 started
+2022-11-02 10:50:54,382 -INFO- Task 21 started
+2022-11-02 10:50:54,382 -INFO- Task 22 started
+2022-11-02 10:50:54,383 -INFO- Task 23 started
+2022-11-02 10:52:01,516 -INFO- generating gene anntations
+2022-11-02 10:52:03,314 -INFO- 2143 sequences classified by HMM
+2022-11-02 10:52:03,314 -INFO- see protein domain sequences in `parsed.fa.rexdb-plant.dom.faa` and annotation gff3 file in `parsed.fa.rexdb-plant.dom.gff3`
+2022-11-02 10:52:03,314 -INFO- classifying the unclassified sequences by searching against the classified ones
+2022-11-02 10:52:03,692 -INFO- using the 80-80-80 rule
+2022-11-02 10:52:03,692 -INFO- run CMD: `makeblastdb -in ./tmp/pass1_classified.fa -dbtype nucl`
+2022-11-02 10:52:03,890 -INFO- run CMD: `blastn -query ./tmp/pass1_unclassified.fa -db ./tmp/pass1_classified.fa -out ./tmp/pass1_unclassified.fa.blastout -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen qcovs qcovhsp sstrand' -num_threads 24`
+2022-11-02 10:52:11,392 -INFO- 5104 sequences classified in pass 2
+2022-11-02 10:52:11,392 -INFO- total 7247 sequences classified.
+2022-11-02 10:52:11,392 -INFO- see classified sequences in `parsed.fa.rexdb-plant.cls.tsv`
+2022-11-02 10:52:11,392 -INFO- writing library for RepeatMasker in `parsed.fa.rexdb-plant.cls.lib`
+2022-11-02 10:52:11,704 -INFO- writing classified protein domains in `parsed.fa.rexdb-plant.cls.pep`
+2022-11-02 10:52:11,785 -INFO- Summary of classifications:
+Order           Superfamily      # of Sequences# of Clade Sequences    # of Clades# of full Domains
+LTR             Copia                      1156            513             12            122
+LTR             Gypsy                      4877           1203              9            125
+LINE            unknown                     389              0              0              0
+TIR             EnSpm_CACTA                 165              0              0              0
+TIR             MuDR_Mutator                256              0              0              0
+TIR             PIF_Harbinger                42              0              0              0
+TIR             Sola1                         1              0              0              0
+TIR             hAT                         195              0              0              0
+Helitron        unknown                     144              0              0              0
+mixture         mixture                      22              0              0              0
+2022-11-02 10:52:11,789 -INFO- Pipeline done.
+2022-11-02 10:52:11,789 -INFO- cleaning the temporary directory ./tmp
+2022-11-02 10:52:13,395 -WARNING- Grid computing is not available because DRMAA not configured properly: Could not find drmaa library.  Please specify its full path using the environment variable DRMAA_LIBRARY_PATH
+2022-11-02 10:52:13,413 -INFO- VARS: {'sequence': '/data/courses/assembly-annotation-course/Brassicaceae_repbase_all_march2019.fasta', 'hmm_database': 'rexdb-plant', 'seq_type': 'nucl', 'prefix': 'Brassicaceae', 'force_write_hmmscan': False, 'processors': 24, 'tmp_dir': './tmp', 'min_coverage': 20, 'max_evalue': 0.001, 'disable_pass2': False, 'pass2_rule': '80-80-80', 'no_library': False, 'no_reverse': False, 'no_cleanup': False, 'p2_identity': 80.0, 'p2_coverage': 80.0, 'p2_length': 80.0}
+2022-11-02 10:52:13,413 -INFO- checking dependencies:
+2022-11-02 10:52:13,444 -INFO- hmmer	3.3.1	OK
+2022-11-02 10:52:13,731 -INFO- blastn	2.10.1+	OK
+2022-11-02 10:52:13,732 -INFO- check database rexdb-plant
+2022-11-02 10:52:13,732 -INFO- db path: /usr/local/lib/python3.9/site-packages/TEsorter/database
+2022-11-02 10:52:13,732 -INFO- db file: REXdb_protein_database_viridiplantae_v3.0.hmm
+2022-11-02 10:52:13,733 -INFO- REXdb_protein_database_viridiplantae_v3.0.hmm	OK
+2022-11-02 10:52:13,733 -INFO- Start classifying pipeline
+2022-11-02 10:52:13,965 -INFO- total 1582 sequences
+2022-11-02 10:52:13,965 -INFO- translating `/data/courses/assembly-annotation-course/Brassicaceae_repbase_all_march2019.fasta` in six frames
+/usr/local/lib/python3.9/site-packages/Bio/Seq.py:2334: BiopythonWarning: Partial codon, len(sequence) not a multiple of three. Explicitly trim the sequence or add trailing N before translation. This may become an error in future.
+  warnings.warn(
+2022-11-02 10:52:17,283 -INFO- HMM scanning against `/usr/local/lib/python3.9/site-packages/TEsorter/database/REXdb_protein_database_viridiplantae_v3.0.hmm`
+2022-11-02 10:52:17,285 -INFO- use existed non-empty `Brassicaceae.domtbl` and skip hmmscan
+2022-11-02 10:52:17,285 -INFO- generating gene anntations
+2022-11-02 10:52:17,811 -INFO- 706 sequences classified by HMM
+2022-11-02 10:52:17,812 -INFO- see protein domain sequences in `Brassicaceae.dom.faa` and annotation gff3 file in `Brassicaceae.dom.gff3`
+2022-11-02 10:52:17,812 -INFO- classifying the unclassified sequences by searching against the classified ones
+2022-11-02 10:52:17,897 -INFO- using the 80-80-80 rule
+2022-11-02 10:52:17,897 -INFO- run CMD: `makeblastdb -in ./tmp/pass1_classified.fa -dbtype nucl`
+2022-11-02 10:52:18,033 -INFO- run CMD: `blastn -query ./tmp/pass1_unclassified.fa -db ./tmp/pass1_classified.fa -out ./tmp/pass1_unclassified.fa.blastout -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen qcovs qcovhsp sstrand' -num_threads 24`
+2022-11-02 10:52:18,437 -INFO- 3 sequences classified in pass 2
+2022-11-02 10:52:18,437 -INFO- total 709 sequences classified.
+2022-11-02 10:52:18,437 -INFO- see classified sequences in `Brassicaceae.cls.tsv`
+2022-11-02 10:52:18,437 -INFO- writing library for RepeatMasker in `Brassicaceae.cls.lib`
+2022-11-02 10:52:18,516 -INFO- writing classified protein domains in `Brassicaceae.cls.pep`
+2022-11-02 10:52:18,584 -INFO- Summary of classifications:
+Order           Superfamily      # of Sequences# of Clade Sequences    # of Clades# of full Domains
+LTR             Copia                       379            379              9            341
+LTR             Gypsy                       145            144              7             94
+pararetrovirus  unknown                       4              0              0              0
+LINE            unknown                      41              0              0              0
+TIR             EnSpm_CACTA                  22              0              0              0
+TIR             MuDR_Mutator                 62              0              0              0
+TIR             PIF_Harbinger                13              0              0              0
+TIR             Tc1_Mariner                   1              0              0              0
+TIR             hAT                          23              0              0              0
+Helitron        unknown                      19              0              0              0
+2022-11-02 10:52:18,585 -INFO- Pipeline done.
+2022-11-02 10:52:18,585 -INFO- cleaning the temporary directory ./tmp
