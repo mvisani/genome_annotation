@@ -118,52 +118,61 @@ cd $WORKDIR
 #
 #maker -cpus $SLURM_CPUS_PER_TASK
 #
-gff3_merge \
-    -d $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.maker.output/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon_master_datastore_index.log
-
-fasta_merge \
-    -d $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.maker.output/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon_master_datastore_index.log
-
-maker_map_ids \
-    --prefix LER_ \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.gff \
-    > $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.all.id.map
-
-map_fasta_ids \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.all.id.map \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.proteins.fasta
-
-map_fasta_ids \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.all.id.map \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.transcripts.fasta
-
-map_gff_ids \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.all.id.map \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.gff
-
-
-module load Blast/ncbi-blast/2.9.0+
-makeblastdb \
-    -in $uniprot_plant_reviewed \
-    -dbtype prot \
-    -out $WORKDIR/blast_db/uniprot_plant_reviewed
-
-blastp \
-    -query $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.proteins.fasta \
-    -db $WORKDIR/blast_db/uniprot_plant_reviewed \
-    -num_threads $SLURM_CPUS_PER_TASK \
-    -outfmt 6 \
-    -evalue 1e-10 \
-    > $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.blastp_output.fa
-
-maker_functional_fasta \
-    $uniprot_plant_reviewed \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.blastp_output.fa \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.proteins.fasta \
-    > $WORKDIR/maker_functional.fasta
-
-maker_functional_gff \
-    $uniprot_plant_reviewed \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.blastp_output.fa \
-    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.gff \
-    > $WORKDIR/maker_functional.gff 
+#gff3_merge \
+#    -d $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.maker.output/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon_master_datastore_index.log
+#
+#fasta_merge \
+#    -d $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.maker.output/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon_master_datastore_index.log
+#
+#maker_map_ids \
+#    --prefix LER_ \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.gff \
+#    > $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.all.id.map
+#
+#map_fasta_ids \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.all.id.map \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.proteins.fasta
+#
+#map_fasta_ids \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.all.id.map \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.transcripts.fasta
+#
+#map_gff_ids \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.all.id.map \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.gff
+#
+#
+#module load Blast/ncbi-blast/2.9.0+
+#makeblastdb \
+#    -in $uniprot_plant_reviewed \
+#    -dbtype prot \
+#    -out $WORKDIR/blast_db/uniprot_plant_reviewed
+#
+#blastp \
+#    -query $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.proteins.fasta \
+#    -db $WORKDIR/blast_db/uniprot_plant_reviewed \
+#    -num_threads $SLURM_CPUS_PER_TASK \
+#    -outfmt 6 \
+#    -evalue 1e-10 \
+#    > $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.blastp_output.fa
+#
+#maker_functional_fasta \
+#    $uniprot_plant_reviewed \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.blastp_output.fa \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.proteins.fasta \
+#    > $WORKDIR/maker_functional.fasta
+#
+#maker_functional_gff \
+#    $uniprot_plant_reviewed \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}.blastp_output.fa \
+#    $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.gff \
+#    > $WORKDIR/maker_functional.gff 
+#
+mkdir busco
+module load BUSCO/5.4.2-foss-2021a;
+busco \
+    -i $WORKDIR/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.proteins.fasta \
+    -l brassicales_odb10 \
+    -m proteins \
+    -c $SLURM_CPUS_PER_TASK \
+    -o busco_out
