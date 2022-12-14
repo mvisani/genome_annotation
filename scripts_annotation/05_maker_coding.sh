@@ -175,4 +175,4 @@ busco \
     -l brassicales_odb10 \
     -m proteins \
     -c $SLURM_CPUS_PER_TASK \
-    -o busco_out
+    -o busco
