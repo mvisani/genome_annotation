@@ -1,0 +1,12 @@
+.vscode/*
+DupGen_finder/*
+busco/*
+coding_region_annotation/*
+out_08_dup_gen/*
+out_09/*
+salmon-1.9.0_linux_x86_64.tar.gz
+salmon-1.9.0_linux_x86_64/*
+salmon/*
+scripts_annotation/*.out
+star/*
+transpos_element_annotation/*
