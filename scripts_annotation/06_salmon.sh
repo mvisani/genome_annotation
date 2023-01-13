@@ -28,15 +28,6 @@ rm -rf $OUTDIR/*
 if ! [ -d $WORKDIR ]; then mkdir $WORKDIR; fi 
 if ! [ -d $BUSCO ]; then mkdir $BUSCO; fi 
 
-#cd $BUSCO
-#rm -rf $BUSCO/*
-#busco \
-#    -i $MAKEOUT/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.proteins.fasta \
-#    -l brassicales_odb10 \
-#    -m proteins \
-#    -c 4 \
-#    --out busco_out
-
 cd $WORKDIR
 $SALMONDIR/salmon index \
     -t $MAKEOUT/${WORK[$SLURM_ARRAY_TASK_ID]}_pilon.all.maker.transcripts.fasta \
